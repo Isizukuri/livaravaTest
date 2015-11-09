@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Чому прокурори хочуть стати програмістами - {% block meta_title %}{% endblock meta_title %}</title>
+		<meta name="description"
+			value="Жорстка прокурорська правда" />
+
+		<!-- Include Styles -->
+		<link rel="stylesheet" href="{{ static("bower_components/bootstrap/dist/css/bootstrap.min.css") }}">
+		
+		
+		{% block extra_css %}{% endblock extra_css %}
+		
+	</head>
+  	<body>
+		<!-- Start Container -->
+		<div class="container">
+
+			<!-- Start Header -->
+			<div class="row" id="header">
+            
+            {% block logo %}
+				<!-- Logo -->
+				<div class="col-xs-8">
+				<h1>Тестова сторінка</h1>
+				</div>
+			{% endblock logo %}
+            
+            </div>
+			<!-- End Header -->
+
+			<!-- Start SubHeader -->
+			<div class="row" id="sub-header">
+
+				<div class="col-xs-12">
+					<ul class="nav nav-tabs">
+					             {% url 'home' as home_url %}
+					  	<li role="presentation" {% if request.path == home_url %}class="active"{% endif %}>
+                            <a href="{% url "home" %}">Студенти</a></li>
+                            
+                            {% url 'journal' as journal_url %}
+					 	<li role="presentation" {% if journal_url in request.path %}class="active"{% endif %}>
+                            <a href="/journal">Відвідування</a></li>
+                            
+                            {% url 'groups' as groups_url %}
+					  	<li role="presentation" {% if groups_url in request.path %}class="active"{% endif %}>
+                            <a href="{% url 'groups' %}">Групи</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- End SubHeader -->
+
+			<!-- Start Main Page Content -->
+			<div class="row" id="content-columns">
+
+				<div class="col-xs-12" id="content-column">
+					
+					{% comment "Not used alert so far" %}
+               <div class="alert alert-warning" role="alert">Status Update!</div>
+               {% endcomment %}
+					
+					<h2>{% block title %}{% endblock title %}</h2>
+               {% block content %}{% endblock content %}
+         </div>
+            </div>
+         
+         {% block footer %}   
+         <!-- End Content Columns -->
+
+			<!-- Start Footer -->
+			<div class="row" id="footer">
+
+				<div class="col-xs-12">
+				&copy; 2015 Сервіс Обліку Студентів
+				</div>
+			</div>
+			<!-- End Footer -->
+			{% endblock footer %}
+
+		</div>
+		<!-- End Container -->
+		
+		<!-- Javascripts Section -->
+		<script src="{{ static("bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+		<script src="{{ static("bower_components/bootstrap/dist/js/jquery.min.js") }}"></script>
+		{% block extra_js %}{% endblock extra_js %}
+  	</body>
+</html>

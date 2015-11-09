@@ -1,0 +1,25 @@
+{
+  "name": "testapp",
+  "authors": [
+    "Isizukuri <ragnarok49@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/static/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

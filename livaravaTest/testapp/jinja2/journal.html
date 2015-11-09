@@ -1,0 +1,82 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Додавання студентів{% endblock meta_title %}
+
+{% block title %}Форма додавання студента{% endblock title %}
+
+{% block content %}
+	<div class="container row">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-3 control-label">Ім'я*</label>
+			    <div class="col-sm-4">
+			     <input type="text" class="form-control" id="inputName">
+			    </div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">По-батькові</label>
+			    <div class="col-sm-4">
+			    	<input type="text" class="form-control" id="inputFatherName">
+			    </div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">Прізвище*</label>
+			    <div class="col-sm-4">
+			    	<input type="text" class="form-control" id="inputSurname">
+			    </div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">№ білету*</label>
+			    <div class="col-sm-4">
+			    	<input type="text" class="form-control" id="inputTicketNumber">
+			    </div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">Дата народження</label>
+			    <div class="col-sm-4">
+			    	<input type="date" class="form-control" id="inputBirthDate">
+			    </div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">Фото</label>
+			    <div class="col-sm-4">
+			    	<input type="file" id="inputPhoto" title = 'Вибрати фото на диску'>
+    				</div>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">Додаткові нотатки</label>
+			    <div class="col-sm-4">
+			    	<textarea class="form-control" rows="4"></textarea>
+			    </div>
+			</div>
+
+
+
+			<div class="form-group">
+			    <label for="inputPassword3" class="col-sm-3 control-label">Група</label>
+			    <div class="col-xs-4" id="group-selector">
+					<select>
+						<option value="">МтМ - 21, Подоба Віталій (No 254)</option>
+						<option value="">МтМ - 22, Корост Андрій (No 2123)</option>
+					</select>
+				</div>
+			</div>
+					  
+			<div class="form-group">
+			   	<div class="col-sm-offset-3 col-sm-9">
+			    	<button type="text" class="btn btn-primary">Зберегти</button>
+			    	<a href="">Скасувати</a>
+			    </div>
+			</div>
+		</form>
+	</div>
+
+{% endblock content %}
