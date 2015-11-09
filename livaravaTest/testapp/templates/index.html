@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block meta_title %}База{% endblock meta_title %}
+
+{% block title %}Список творів жанру українська любовна лірика{% endblock title %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+  <li role="presentation" {% if request.path == '/' %}class="active"{% endif %}><a href="/">Автори</a></li>
+  <li role="presentation" {% if request.path == '/names/' %}class="active"{% endif %}><a href="/names">Твори</a></li>
+  <li role="presentation" {% if request.path == '/years/' %}class="active"{% endif %}><a href="/years">Роки написання</a></li>
+</ul>
+
+<div>Тут буде список авторів {{ request.path }}</div>
+
+{% for author in authors %}
+  <div>{{ author }}</div>
+{% endfor %}
+
+{% endblock content %}

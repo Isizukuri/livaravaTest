@@ -60,7 +60,6 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "match_extension": ".jinja",
-            "app_dirname": "jinja2",
             "extensions": [
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
