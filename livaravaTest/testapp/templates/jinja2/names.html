@@ -5,7 +5,13 @@
 
 <ul class='col-md-9'>
 {% for verse in verses %}
- <li><a>{{verse.name}} - {{ verse.author.all.0.name }}</a></li>
+ <li>
+    <a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}} - {{ verse.author.all.0.name }}</a>
+    <div class="collapse" id="{{verse.name}}">
+        <div class='well'>{{verse.text}}</div>
+        <div></div>
+    </div>
+ </li>
 {% endfor %}
 </ul>
 
@@ -22,26 +28,29 @@
         </div>
         <div class="form-group">
             <label>Виберіть автора зі списку або введіть нового автора</label>
-            	<select class="form-control" name='author'>
+            	<select class="form-control author_select" name='author'>
             		<option></option>
             		{% for author in authors %}
   					<option>{{ author.name }}</option>
   					{% endfor %}
 				</select>
-        <a>Автор відсутній у списку</a>
+                <input type="text" class="form-control author_input" placeholder="Введіть автора" name='author'> 
+        <a class='author_toggle'>Автор відсутній у списку</a>
         </div>
         <div class="form-group">
             <label>Виберіть рік написання, або введіть новий</label>
-        		<select class="form-control" name='year'>
+        		<select class="form-control year_select" name='year'>
             		<option></option>
             		{% for year in years %}
   					<option>{{ year.year }}</option>
   					{% endfor %}
-				</select>				
-		<a>Рік відсутній у списку</a>
+				</select>	
+                <input type="text" class="form-control year_input" placeholder="Введіть рік написання" name='year'>			
+		<a class='year_toggle'>Рік відсутній у списку</a>
         </div>
         
         <button type="submit" class="btn btn-success">Додати вірш</button>
     </form>
 </div>
 {% endblock content %}
+{% block extra_js %}<script src="/static/scripts/script.js"></script> {% endblock extra_js %}
