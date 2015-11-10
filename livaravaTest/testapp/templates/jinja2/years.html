@@ -1,0 +1,23 @@
+{% extends "jinja2/base.html" %}
+
+{% block meta_title %}База{% endblock meta_title %}
+
+{% block title %}Список японської класичної поезії за роками написання{% endblock title %}
+
+{% block content %}
+
+<ul>
+{% for year in years %}
+ <li><a>{{ year.year }}</a></li>
+{% endfor %}
+</ul>
+
+<form class="form-inline" action="/years/" method="post">
+	{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" id="year" placeholder="Введіть рік написання" name='year'>
+  </div>
+  <button type="submit" class="btn btn-success">Додати рік написання</button>
+</form>
+
+{% endblock content %}

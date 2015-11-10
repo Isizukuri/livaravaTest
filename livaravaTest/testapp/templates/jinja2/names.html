@@ -1,0 +1,47 @@
+{% extends "jinja2/base.html" %} 
+{% block meta_title %}База{% endblock meta_title %} 
+{% block title %}Список японської класичної поезії за назвами творів{% endblock title %}
+{% block content %} 
+
+<ul class='col-md-9'>
+{% for verse in verses %}
+ <li><a>{{verse.name}} - {{ verse.author.all.0.name }}</a></li>
+{% endfor %}
+</ul>
+
+<div class='col-md-3'>
+    <form action="/names/" method="post">
+    	{% csrf_token %}
+        <div class="form-group">
+            <label for='name'>Назва твору</label>
+            <input name='name' type="text" class="form-control" id="name" placeholder="Введіть назву вірша, або його перший рядок">
+        </div>
+        <div class="form-group">
+            <label for="text">Текст твору</label>
+            <textarea name='text' type="text" class="form-control" id="text" placeholder="Введіть текст вірша"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Виберіть автора зі списку або введіть нового автора</label>
+            	<select class="form-control" name='author'>
+            		<option></option>
+            		{% for author in authors %}
+  					<option>{{ author.name }}</option>
+  					{% endfor %}
+				</select>
+        <a>Автор відсутній у списку</a>
+        </div>
+        <div class="form-group">
+            <label>Виберіть рік написання, або введіть новий</label>
+        		<select class="form-control" name='year'>
+            		<option></option>
+            		{% for year in years %}
+  					<option>{{ year.year }}</option>
+  					{% endfor %}
+				</select>				
+		<a>Рік відсутній у списку</a>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Додати вірш</button>
+    </form>
+</div>
+{% endblock content %}

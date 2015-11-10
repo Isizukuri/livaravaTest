@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_jinja',
+    'crispy_forms',
     'testapp',
 )
 
@@ -55,28 +56,12 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'livaravaTest.urls'
 
 TEMPLATES = [
+
     {
-        "BACKEND": "django_jinja.backend.Jinja2",
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "match_extension": ".jinja",
-            "extensions": [
-                "jinja2.ext.do",
-                "jinja2.ext.loopcontrols",
-                "jinja2.ext.with_",
-                "jinja2.ext.i18n",
-                "jinja2.ext.autoescape",
-                "django_jinja.builtins.extensions.CsrfExtension",
-                "django_jinja.builtins.extensions.CacheExtension",
-                "django_jinja.builtins.extensions.TimezoneExtension",
-                "django_jinja.builtins.extensions.UrlsExtension",
-                "django_jinja.builtins.extensions.StaticFilesExtension",
-                "django_jinja.builtins.extensions.DjangoFiltersExtension",
-            ],
-            "autoescape": True,
-            "auto_reload": DEBUG,
-            "translation_engine": "django.utils.translation",
-        }
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [os.path.join(BASE_DIR, 'templates/jinja2')],
+        'APP_DIRS': True,
+        'OPTIONS': {'environment': 'livaravaTest.jinja2.Environment', },
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -127,3 +112,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 PORTAL_URL = 'http://localhost:8000'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -1,0 +1,21 @@
+{% extends "jinja2/base.html" %}
+
+{% block meta_title %}База{% endblock meta_title %}
+
+{% block title %}Список японської класичної поезії за автором{% endblock title %}
+
+{% block content %}
+<ul>
+{% for author in authors %}
+ <li><a>{{ author.name }}</a></li>
+{% endfor %}
+</ul>
+
+<form class="form-inline" action="/" method="post">
+	{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" id="author_name" placeholder="Введіть ім’я автора" name='author_name'>
+  </div>
+  <button type="submit" class="btn btn-success">Додати автора</button>
+</form>
+{% endblock content %}
