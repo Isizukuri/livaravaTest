@@ -21,6 +21,6 @@ urlpatterns = patterns('',
                        url(r'^$', 'testapp.views.authors', name='index'),
                        url(r'^names/$', 'testapp.views.names', name='names'),
                        url(r'^years/$', 'testapp.views.years', name='years'),
-                       url(r'^like$', 'testapp.views.like', name='like'),
+                       url(r'^like/$', 'testapp.views.like', name='like'),
                        url(r'^admin/', include(admin.site.urls)),
                        )

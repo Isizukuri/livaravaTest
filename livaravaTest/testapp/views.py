@@ -82,5 +82,8 @@ def years(request):
 
 
 def like(request):
-    pass
-    return 'true'
+    verse_id = unicode(request.POST.get('id'))
+    verse = Verse.index.get(name=verse_id)
+    verse.likes += 1
+    verse.save()
+    return HttpResponse(verse.likes)

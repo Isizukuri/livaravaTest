@@ -7,8 +7,8 @@
             <ol>
                 {% for verse in year.verse.all %}
                 <li>
-		        	<a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}}{% if  verse.author.all.0.name%} - {{ verse.author.all.0.name }}{% endif %}</a>
-		        	<div class="collapse" id="{{verse.name}}">
+		        	<a data-toggle="collapse" href="#{{verse.name | cut:" "}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}}{% if  verse.author.all.0.name%} - {{ verse.author.all.0.name }}{% endif %}</a>
+		        	<div class="collapse" id="{{verse.name | cut:" "}}">
 			            <div class='well'>{{verse.text}}</div>
 			            <div></div>
 	        		</div>

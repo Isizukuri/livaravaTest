@@ -1,4 +1,33 @@
 $(document).ready(function() {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        };
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     $(".year_input").hide();
     $(".author_input").hide();
     $('.year_toggle').click(function() {
@@ -20,14 +49,13 @@ $(document).ready(function() {
     });
 
     $(".like").click(function() {
-            var id = $(this).attr("verse-name");
-            var parameters = {'id': id};
-            $.post("/", parameters, function(data) {
-                /*
-                $(this).html("<div style='float: right;' class='like' verse-name='{{verse.name}}'>
-                Мені подобається <img src='http://cliparts.co/cliparts/kiM/nnL/kiMnnL8yT.svg' style='width:30px%;height:30px;'>"+data+
-            "</div>");*/
-            });  		
+        var id = $(this).attr("verse-name");
+        var parameters = {
+            'id': id
+        };
+        var span = $(this).сhildren('span');
+        $.post("/like/", parameters, function(data) {
+            span.html(data);
         });
+    });
 });
-
