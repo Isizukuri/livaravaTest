@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from models import Author, Verse, Year
 
@@ -8,14 +9,20 @@ from models import Author, Verse, Year
 
 
 def authors(request):
+    verses = Verse.category().instance.all()
+    authors = Author.category().instance.all()
+    years = Year.category().instance.all()
     if request.method == 'GET':
-        authors = Author.category().instance.all()
-        return render(request, 'jinja2/index.html', {'authors': authors})
+        return render(request, 'jinja2/index.html', {'verses': verses,
+                                                     'authors': authors,
+                                                     'years': years})
     elif request.method == 'POST':
-        if request.POST.get('author_name') is not None:
+        if request.POST.get('author_name'):
             Author(name=unicode(request.POST['author_name'])).save()
         authors = Author.category().instance.all()
-        return render(request, 'jinja2/index.html', {'authors': authors})
+        return render(request, 'jinja2/index.html', {'verses': verses,
+                                                     'authors': authors,
+                                                     'years': years})
 
 
 def names(request):
@@ -29,20 +36,25 @@ def names(request):
                                                      'authors': authors,
                                                      'years': years})
     elif request.method == 'POST':
-        if (request.POST.get('name') is not None) and (request.POST.get('text') is not None):
-            verse = Verse(name=unicode(request.POST['name']), text=unicode(request.POST['text'])).save()
+        if request.POST.get('name') and request.POST.get('text'):
+            verse = Verse(
+                name=unicode(request.POST['name']), text=unicode(request.POST['text'])).save()
             if request.POST.get('author'):
-            	if request.POST.get('author') in auth_names:
-                	verse.author.connect(Author.index.get(name=request.POST['author']))
+                if unicode(request.POST.get('author')) in auth_names:
+                    verse.author.connect(
+                        Author.index.get(name=request.POST['author']))
                 else:
-                	Author(name=unicode(request.POST['author'])).save()
-                	verse.author.connect(Author.index.get(name=request.POST['author']))
+                    Author(name=unicode(request.POST['author'])).save()
+                    verse.author.connect(
+                        Author.index.get(name=unicode(request.POST['author'])))
             if request.POST.get('year'):
-            	if request.POST.get('year') in year_list:
-                	verse.year.connect(Year.index.get(year=int(request.POST['year'])))
+                if int(request.POST.get('year')) in year_list:
+                    verse.year.connect(
+                        Year.index.get(year=int(request.POST['year'])))
                 else:
-                	Year(year=unicode(request.POST['year'])).save()
-                	verse.year.connect(Year.index.get(year=int(request.POST['year'])))               
+                    Year(year=request.POST['year']).save()
+                    verse.year.connect(
+                        Year.index.get(year=int(request.POST['year'])))
         verses = Verse.category().instance.all()
         authors = Author.category().instance.all()
         years = Year.category().instance.all()
@@ -52,15 +64,23 @@ def names(request):
 
 
 def years(request):
+    verses = Verse.category().instance.all()
+    authors = Author.category().instance.all()
+    years = Year.category().instance.all()
     if request.method == 'GET':
         years = Year.category().instance.all()
-        return render(request, 'jinja2/years.html', {'years': years})
+        return render(request, 'jinja2/years.html', {'verses': verses,
+                                                     'authors': authors,
+                                                     'years': years})
     elif request.method == 'POST':
         if request.POST.get('year') is not None:
             Year(year=unicode(request.POST['year'])).save()
             years = Year.category().instance.all()
-        return render(request, 'jinja2/years.html', {'years': years})
+        return render(request, 'jinja2/years.html', {'verses': verses,
+                                                     'authors': authors,
+                                                     'years': years})
 
 
-def poetry_add(request):
-    return render(request, 'jinja2/poetry_add.html')
+def like(request):
+    pass
+    return 'true'

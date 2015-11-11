@@ -17,10 +17,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 urlpatterns = patterns('',
-# TestApp urls
-url(r'^$', 'testapp.views.authors', name='index'),
-url(r'^names/$', 'testapp.views.names', name='names'),
-url(r'^years/$', 'testapp.views.years', name='years'),
-url(r'^poetry/add/$', 'testapp.views.poetry_add', name='poetry_add'),
-url(r'^admin/', include(admin.site.urls)),
-)
+                       # TestApp urls
+                       url(r'^$', 'testapp.views.authors', name='index'),
+                       url(r'^names/$', 'testapp.views.names', name='names'),
+                       url(r'^years/$', 'testapp.views.years', name='years'),
+                       url(r'^like$', 'testapp.views.like', name='like'),
+                       url(r'^admin/', include(admin.site.urls)),
+                       )

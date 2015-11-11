@@ -7,7 +7,22 @@
 {% block content %}
 <ul>
 {% for author in authors %}
- <li><a>{{ author.name }}</a></li>
+ 	<li>
+ 		<a data-toggle="collapse" href="#{{author.name}}" aria-expanded="false" aria-controls="{{author.name}}">{{author.name}}</a>
+ 		<div class="collapse" id="{{author.name}}">
+		 	<ol>
+		 		{% for verse in author.verse.all %}
+		        <li>
+		        	<a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}}{% if  verse.year.all.0.year%}- {{ verse.year.all.0.year }} р.{% endif %}</a>
+		        	<div class="collapse" id="{{verse.name}}">
+			            <div class='well'>{{verse.text}}</div>
+			            <div></div>
+	        		</div>
+		        </li>
+		        {% endfor %}
+	    </ol>
+	</div>
+    </li>
 {% endfor %}
 </ul>
 

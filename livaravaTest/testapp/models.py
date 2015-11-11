@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from neomodel import (StructuredNode, StringProperty,
-                      IntegerProperty, ArrayProperty,
-                      RelationshipTo, RelationshipFrom)
+                      IntegerProperty, RelationshipTo,
+                      RelationshipFrom)
 
 
 class Author(StructuredNode):
@@ -15,7 +15,6 @@ class Verse(StructuredNode):
     text = StringProperty(required=True)
     author = RelationshipTo('Author', 'WRITTEN_BY')
     year = RelationshipTo('Year', 'WRITTEN_DURING')
-    reviews = ArrayProperty()
     likes = IntegerProperty(default=0)
 
 

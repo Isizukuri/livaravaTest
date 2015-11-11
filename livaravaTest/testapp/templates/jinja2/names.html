@@ -1,56 +1,50 @@
-{% extends "jinja2/base.html" %} 
-{% block meta_title %}База{% endblock meta_title %} 
-{% block title %}Список японської класичної поезії за назвами творів{% endblock title %}
-{% block content %} 
-
+{% extends "jinja2/base.html" %} {% block meta_title %}База{% endblock meta_title %} {% block title %}Список японської класичної поезії за назвами творів{% endblock title %} {% block content %}
 <ul class='col-md-9'>
-{% for verse in verses %}
- <li>
-    <a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}} - {{ verse.author.all.0.name }}</a>
-    <div class="collapse" id="{{verse.name}}">
-        <div class='well'>{{verse.text}}</div>
-        <div></div>
-    </div>
- </li>
-{% endfor %}
+    {% for verse in verses %}
+    <li>
+        <a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}} {% if  verse.author.all.0.name%} - {{ verse.author.all.0.name }}{% endif %}</a>
+        <div class="collapse" id="{{verse.name}}">
+            <div class='well'>{{verse.text}}</div>
+            <div style='float: right;' class='like' verse-name='{{verse.name}}'>
+                Мені подобається <img src="http://cliparts.co/cliparts/kiM/nnL/kiMnnL8yT.svg" style="width:30px%;height:30px;"> {{verse.likes}}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
 </ul>
-
 <div class='col-md-3'>
     <form action="/names/" method="post">
-    	{% csrf_token %}
+        {% csrf_token %}
         <div class="form-group">
-            <label for='name'>Назва твору</label>
-            <input name='name' type="text" class="form-control" id="name" placeholder="Введіть назву вірша, або його перший рядок">
+            <label for='name'>Назва твору*</label>
+            <input name='name' type="text" class="form-control" id="name" placeholder="Введіть назву вірша, або його перший рядок" required>
         </div>
         <div class="form-group">
-            <label for="text">Текст твору</label>
-            <textarea name='text' type="text" class="form-control" id="text" placeholder="Введіть текст вірша"></textarea>
+            <label for="text">Текст твору*</label>
+            <textarea name='text' type="text" class="form-control" id="text" placeholder="Введіть текст вірша" required></textarea>
         </div>
         <div class="form-group">
-            <label>Виберіть автора зі списку або введіть нового автора</label>
-            	<select class="form-control author_select" name='author'>
-            		<option></option>
-            		{% for author in authors %}
-  					<option>{{ author.name }}</option>
-  					{% endfor %}
-				</select>
-                <input type="text" class="form-control author_input" placeholder="Введіть автора" name='author'> 
-        <a class='author_toggle'>Автор відсутній у списку</a>
+            <label id='author'>Виберіть автора зі списку або введіть нового автора</label>
+            <select class="form-control author_select" name='author'>
+                <option></option>
+                {% for author in authors %}
+                <option>{{ author.name }}</option>
+                {% endfor %}
+            </select>
+            <a class='author_toggle'>Автор відсутній у списку</a>
         </div>
         <div class="form-group">
-            <label>Виберіть рік написання, або введіть новий</label>
-        		<select class="form-control year_select" name='year'>
-            		<option></option>
-            		{% for year in years %}
-  					<option>{{ year.year }}</option>
-  					{% endfor %}
-				</select>	
-                <input type="text" class="form-control year_input" placeholder="Введіть рік написання" name='year'>			
-		<a class='year_toggle'>Рік відсутній у списку</a>
+            <label id='year'>Виберіть рік написання, або введіть новий</label>
+            <select class="form-control year_select" name='year'>
+                <option></option>
+                {% for year in years %}
+                <option>{{ year.year }}</option>
+                {% endfor %}
+            </select>
+            <a class='year_toggle'>Рік відсутній у списку</a>
         </div>
-        
         <button type="submit" class="btn btn-success">Додати вірш</button>
     </form>
 </div>
-{% endblock content %}
-{% block extra_js %}<script src="/static/scripts/script.js"></script> {% endblock extra_js %}
+{% endblock content %} {% block extra_js %}
+<script src="/static/scripts/script.js"></script> {% endblock extra_js %}

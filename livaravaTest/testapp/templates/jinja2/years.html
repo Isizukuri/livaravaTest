@@ -1,23 +1,29 @@
-{% extends "jinja2/base.html" %}
-
-{% block meta_title %}База{% endblock meta_title %}
-
-{% block title %}Список японської класичної поезії за роками написання{% endblock title %}
-
-{% block content %}
-
+{% extends "jinja2/base.html" %} {% block meta_title %}База{% endblock meta_title %} {% block title %}Список японської класичної поезії за роками написання{% endblock title %} {% block content %}
 <ul>
-{% for year in years %}
- <li><a>{{ year.year }}</a></li>
-{% endfor %}
+    {% for year in years %}
+    <li>
+        <a data-toggle="collapse" href="#{{year.year}}" aria-expanded="false" aria-controls="collapseExample">{{year.year}} р.</a>
+        <div class="collapse" id="{{year.year}}">
+            <ol>
+                {% for verse in year.verse.all %}
+                <li>
+		        	<a data-toggle="collapse" href="#{{verse.name}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}}{% if  verse.author.all.0.name%} - {{ verse.author.all.0.name }}{% endif %}</a>
+		        	<div class="collapse" id="{{verse.name}}">
+			            <div class='well'>{{verse.text}}</div>
+			            <div></div>
+	        		</div>
+		        </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </li>
+    {% endfor %}
 </ul>
-
 <form class="form-inline" action="/years/" method="post">
-	{% csrf_token %}
-  <div class="form-group">
-    <input type="text" class="form-control" id="year" placeholder="Введіть рік написання" name='year'>
-  </div>
-  <button type="submit" class="btn btn-success">Додати рік написання</button>
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control" id="year" placeholder="Введіть рік написання" name='year'>
+    </div>
+    <button type="submit" class="btn btn-success">Додати рік написання</button>
 </form>
-
 {% endblock content %}
