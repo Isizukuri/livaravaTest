@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 from models import Author, Verse, Year
 
@@ -86,4 +86,6 @@ def like(request):
     verse = Verse.index.get(name=verse_id)
     verse.likes += 1
     verse.save()
-    return HttpResponse(verse.likes)
+    verse_id= verse_id.replace(u' ', '')
+    response = {'tag': verse_id, 'likes': verse.likes}
+    return JsonResponse(response, safe=False)

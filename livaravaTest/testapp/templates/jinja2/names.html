@@ -6,7 +6,7 @@
         <div class="collapse" id="{{verse.name | cut:" "}}">
             <div class='well'>{{verse.text}}</div>
             <div style='float: right;' class='like' verse-name='{{verse.name}}'>
-                Мені подобається <img src="http://cliparts.co/cliparts/kiM/nnL/kiMnnL8yT.svg" style="width:30px%;height:30px;"><span class='{{verse.name}}'>{{verse.likes}}</span>
+                Мені подобається <img src="http://cliparts.co/cliparts/kiM/nnL/kiMnnL8yT.svg" style="width:30px%;height:30px;"><span class='{{verse.name | cut:" "}}'>{{verse.likes}}</span>
             </div>
         </div>
     </li>
@@ -46,5 +46,5 @@
         <button type="submit" class="btn btn-success">Додати вірш</button>
     </form>
 </div>
-{% endblock content %} {% block extra_js %}
-<script src="/static/scripts/script.js"></script> {% endblock extra_js %}
+{% endblock content %} 
+{% block extra_js %}{% endblock extra_js %}

@@ -53,9 +53,9 @@ $(document).ready(function() {
         var parameters = {
             'id': id
         };
-        var span = $(this).сhildren('span');
         $.post("/like/", parameters, function(data) {
-            span.html(data);
+            tag = '.'+data.tag
+            $(tag).html(data.likes);
         });
     });
 });

@@ -10,7 +10,9 @@
 		        	<a data-toggle="collapse" href="#{{verse.name | cut:" "}}" aria-expanded="false" aria-controls="collapseExample">{{verse.name}}{% if  verse.author.all.0.name%} - {{ verse.author.all.0.name }}{% endif %}</a>
 		        	<div class="collapse" id="{{verse.name | cut:" "}}">
 			            <div class='well'>{{verse.text}}</div>
-			            <div></div>
+			            <div style='float: right;' class='like' verse-name='{{verse.name}}'>
+                Мені подобається <img src="http://cliparts.co/cliparts/kiM/nnL/kiMnnL8yT.svg" style="width:30px%;height:30px;"><span class='{{verse.name | cut:" "}}'>{{verse.likes}}</span>
+            </div>
 	        		</div>
 		        </li>
                 {% endfor %}

@@ -93,7 +93,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -111,4 +111,3 @@ STATIC_URL = '/static/'
 
 PORTAL_URL = 'http://localhost:8000'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
